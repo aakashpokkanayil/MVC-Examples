@@ -1,0 +1,19 @@
+﻿@using MVC_Examples.Models
+@model List<Car>
+@* this view is strongly typed with list of cars, so controller has to pass list of cars.*@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="details/@item.name">@item.name</a>
+            </li>
+        }
+    </ul>
+</body>
+</html>

@@ -1,0 +1,101 @@
+﻿@using MVC_Examples.Models @* this line is an expression which starts with @ symbol *@
+@* here we need to use MVC_Examples.Models name space for accessing model*@
+@using MVC_Examples.Enum
+
+@{
+    //this is a code block
+    string appTitle = "Asp.net core app";
+    var person = new Person()
+            {
+                Name = "Aakash",
+                Dob = Convert.ToDateTime("1992-06-26"),
+                Address = null,
+                gender = Gender.male,
+                ChildernNames = new List<string>()
+        {
+            "Boomika",
+            "Devika",
+            "Aakash",
+            "Karn"
+        }
+
+            };
+
+    string alretmsg = $"<script>alert({person.ChildernNames.Count()})</script>";
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@appTitle</title> @* this is an expression *@
+    <meta charset="utf-8" />
+    <link href="~/StyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+    @Html.Raw(alretmsg)
+    <div class="page-content">
+        <h1>@ViewData["heading msg"]</h1>
+        <p>Welcome @person.Name</p>
+        <p>
+            <span> @person.GetAge()</span>
+        </p>
+        @if (!string.IsNullOrEmpty(person.Address))
+        {
+            <p>
+                <span>@person.Address</span>
+            </p>
+        }
+        else
+        {
+            <p>
+                <span>No Address Provided</span>
+            </p>
+        }
+        @switch (person.gender)
+        {
+            case Gender.male:
+                <p>
+                    <span>You are a Male</span>
+                </p>
+                break;
+            case Gender.female:
+                <p>
+                    <span>You are a Female</span>
+                </p>
+                break;
+            case Gender.other:
+                <p>
+                    <span>Your gender is not disclosed</span>
+                </p>
+                break;
+        }
+        @if (person.ChildernNames != null)
+        {
+            <div class="box">
+                <p><span>Your childrens are</span></p>
+                <ul>
+                    @foreach (var item in person.ChildernNames)
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            </div>
+        }
+
+        @if (ViewData["mycars"] != null)
+        {
+            List<string> cars = (List<string>)ViewData["mycars"];
+            <div class="box">
+                <p><span>Your Cars are</span></p>
+                <ul>
+                    @foreach (var item in cars)
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+</body>
+</html>
