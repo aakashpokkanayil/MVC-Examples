@@ -47,6 +47,7 @@ namespace MVC_Examples.Controllers
         [Route("cars")]
         public IActionResult Car()
         {
+            ViewData["Title"] = "Aakash";
             List<Car> cars = new List<Car>()
             {
                 new Car(){
